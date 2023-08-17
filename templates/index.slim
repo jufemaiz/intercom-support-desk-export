@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title Articles
+    meta name="keywords" content="powertracer help support export"
+    meta name="author" content="Enosi"
+    link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous"
+    css:
+      body { margin: 50px }
+
+  body
+    h1 Articles
+
+    hr
+
+    - if tree.any?
+      ul.root
+      - for branch in tree.sort_by { |x| x[1][:article]&.title || x[1][:collection]&.name  }
+        li id=branch[0]
+          - if !branch[1][:article].nil?
+            a href="./articles/#{branch[0]}.html"
+              = branch[1][:article].title
+            = " "
+            small = branch[1][:article].state
+          - if !branch[1][:collection].nil?
+            = branch[1][:collection].name
+            = " "
+            small = branch[1][:collection].description
+
+          - if branch[1][:article].nil? && branch[1][:collection].nil?
+            = 'Unknown'
+
+          - if branch[1][:leaves].any?
+            ul.branch
+              - for leaf in branch[1][:leaves].sort_by { |x| x[1][:article]&.title || 'Collection' }
+                li id=leaf[0]
+                  a href="./articles/#{leaf[0]}.html"
+                    = leaf[1][:article].title
+                  = " "
+                  small = leaf[1][:article].state
+    - else
+      p No articles found.
+
+    hr
+
+    div id="footer"
+      | Copyright &copy; 2023 Enosi

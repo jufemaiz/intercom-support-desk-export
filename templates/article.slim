@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title = "Article: #{title}"
+    meta name="keywords" content="powertracer help support export"
+    meta name="author" content="Enosi"
+    link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous"
+    css:
+      body { margin: 50px }
+
+  body
+    p
+      a href='../' Back
+
+    h1 = "Article: #{title}"
+
+    hr
+
+    dl
+      dt State
+      dd = state
+      dt Type
+      dd = type
+      dt Last updated
+      dd
+        pre = Time.at(updated_at)
+      dt Created
+      dd
+        pre = Time.at(created_at)
+      dt Description
+      dd = description
+
+    hr
+
+    div id="body" = body
+
+    hr
+
+    div id="footer"
+      | Copyright &copy; 2023 Enosi
